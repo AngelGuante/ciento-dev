@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ciento-dev"
+version = "0.1.0"
+description = ""
+authors = ["AngelGuante <miguel_guante@outlook.com>"]
+readme = "README.md"
+packages = [{include = "ciento_dev"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.1.2"
+djangorestframework = "^3.15.2"
+requests = "^2.32.3"
+django-cors-headers = "^4.5.0"
+psycopg2-binary = "^2.9.10"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
