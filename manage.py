@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
+import sys
 from dotenv import load_dotenv
-import json
+# import json
 
 def main():
     """Run administrative tasks."""
@@ -16,9 +17,9 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    appUrl = json.loads(os.getenv('API_SETTINGS', '{}'))
-    execute_from_command_line(['manage.py', 'runserver', f"{appUrl.get('URL')}".replace('http://','')
-                                                                               .replace('/','')])
+    # appUrl = json.loads(os.getenv('API_SETTINGS', '{}'))
+    # execute_from_command_line(['manage.py', 'runserver', "127.0.0.1:8000"])
+    execute_from_command_line(sys.argv)
 
 
 if __name__ == '__main__':

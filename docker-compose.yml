@@ -1,12 +1,48 @@
-version: '3.8'
-
 services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: cientodev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Admin1993
+    ports:
+      - "5432:5432"
+    networks:
+      - cientodev_network
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin1234"
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+    networks:
+      - cientodev_network
+
   web:
     build: .
+    depends_on:
+      - postgres
     ports:
       - "8000:8000"
-    volumes:
-      - .:/app
-    environment:
-      - DEBUG=True
-    command: python manage.py runserver 0.0.0.0:8000
+    networks:
+      - cientodev_network
+  
+networks:
+  cientodev_network:
+    driver: bridge
+
+
+  # web:
+  #   build: .
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - .:/app
+  #   environment:
+  #     - DEBUG=True
+  #   command: python manage.py runserver 127.0.0.1:8000
